@@ -9,6 +9,7 @@ from scipy.stats import gaussian_kde
 from scipy.stats import binom
 from scipy.stats import gamma
 from scipy.stats import poisson
+from scipy.stats import beta
 
 
 def values(series):
@@ -474,3 +475,46 @@ def set_pyplot_params():
     # plt.rcParams['figure.dpi'] = 300
     plt.rcParams['axes.prop_cycle'] = color_cycle
     plt.rcParams['lines.linewidth'] = 3
+
+def get_poll_results(size=30): 
+    ''' funtion that return the poll data for session 5 '''
+    rng = np.random.default_rng()
+    sample = rng.beta(a=45, b=55, size=size)
+    return sample
+
+def get_gamma_plots():
+    # Define Beta distribution parameters for each subplot
+    beta_params = [(1, 5), (1, 2), (3, 7),
+                   (1, 1), (5, 5), (20, 20),
+                   (7, 3), (2, 1), (5, 1)]
+    
+    # Create subplots
+    fig, axes = plt.subplots(3, 3, figsize=(7, 7))
+    x = np.linspace(0, 1, 1000)
+    
+    # Loop through parameters and plot each Beta distribution
+    for ax, (a, b) in zip(axes.flatten(), beta_params):
+        y = beta.pdf(x, a, b)
+        ax.plot(x, y, 'k', label=f'Beta({a},{b})')
+        
+        # Mean and mode
+        mean = a / (a + b)
+        mode = (a - 1) / (a + b - 2) if a > 1 and b > 1 else np.nan
+        
+        # Plot mean and mode
+        ax.axvline(mean, color='blue', linestyle='-', alpha=0.6, label="Mean")
+        if not np.isnan(mode):
+            ax.axvline(mode, color='blue', linestyle='--', alpha=0.6, label="Mode")
+        
+        # Formatting
+        ax.set_title(f'Beta({a},{b})', fontsize=12)
+        ax.set_xlim(0, 1)
+        ax.set_ylim(0, 5)
+        ax.set_xticks([0, 0.25, 0.5, 0.75, 1])
+        ax.set_yticks([])
+        ax.set_xlabel('$\pi$')
+        ax.set_ylabel('$f(\pi)$')
+    
+    # Adjust layout and show
+    plt.tight_layout()
+    plt.show()
