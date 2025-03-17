@@ -518,3 +518,10 @@ def get_gamma_plots():
     # Adjust layout and show
     plt.tight_layout()
     plt.show()
+    
+def get_sample(df,n=20,perc=0.45, random_state=42):
+    total_ok = int(n*perc)
+    pass_db = df[df['rating']==3].sample(n=total_ok, random_state=random_state)
+    not_pass_db = df[df['rating']<3].sample(n=n-total_ok, random_state=random_state)
+    data_set = pd.concat([pass_db,not_pass_db]).sort_values(by=['year'])
+    return data_set
