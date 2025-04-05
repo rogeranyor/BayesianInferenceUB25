@@ -1,5 +1,3 @@
-Based on the contents of the [BayesianInferenceUB25 GitHub repository](https://github.com/enriquemoraayala/BayesianInferenceUB25), here is a well-structured and enhanced `README.md` file:
-
 ```markdown
 # BayesianInferenceUB25
 
@@ -24,10 +22,10 @@ Students will gain theoretical and practical foundations in Bayesian statistics,
 ## 📂 Repository Structure
 
 ```
-├── notebooks/      # Jupyter notebooks with practical examples and exercises
-├── slides/         # Lecture slides (PDF format)
-├── LICENSE         # License (Apache 2.0)
-└── README.md       # This file
+- notebooks/      # Jupyter notebooks with practical examples and exercises
+- slides/         # Lecture slides (PDF format)
+- LICENSE         # License (Apache 2.0)
+- README.md       # This file
 ```
 
 ---
